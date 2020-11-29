@@ -1,6 +1,6 @@
 var cityInput = document.querySelector('#city-input');
 var cityBtn = document.querySelector('#search-btn');
-var cityForecastEl = document.querySelector('.city-forecast');
+var forecastEl = document.querySelector('.city-forecast');
 var currentWeatherEl = document.querySelector('.current-weather');
 var cityNameEl = document.querySelector('.city-name');
 
@@ -18,7 +18,7 @@ var formHandler = function(event) {
 
 // uses 'current weather api' to pull latitude and longitude
 var getCoords = function(city) {
-    var currentWeatherApi = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=3655ed2750f651629b08c7f61f4fd95c`;
+    var currentWeatherApi = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=91d7d61a609221126ce94454c32c2e3d`;
 
     fetch(currentWeatherApi).then(function(response) {
         if (response.ok) {
@@ -39,12 +39,13 @@ var getCoords = function(city) {
 }
 
     // uses latitude and longitude to pull current weather and five-day forecast
-var getCityForecast = function(lon, lat, city) {
-    var oneCallApi = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&exclude=minutely,hourly,alerts&appid=0231b088137927c3d579de4869b3ea5f`;
+    var getCityForecast = function(lon, lat) {
+    var oneCallApi = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&exclude=minutely,hourly,alerts&appid=91d7d61a609221126ce94454c32c2e3d`;
     fetch(oneCallApi).then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
-                displayForecast(data, city)
+                // fiveDayForecast(data);
+                currentForecast(data);
             });
         }
     })
@@ -61,30 +62,34 @@ var formatCityName = function(city) {
 }
 
 // displays forecast for city
-var displayForecast = function(forecast) {
+var currentForecast = function(forecast) {
 
-    cityForecastEl.classList.remove('hide');
+    forecastEl.classList.remove('hide');
 
-    var cityTemp = document.createElement('p');
-    cityTemp.classList = 'pl-3 mt-3 weather-info';
-    cityTemp.textContent = `Current Temperature: ${forecast.current['temp']}`;
-    currentWeatherEl.appendChild(cityTemp);
+    var currentTemp = forecast.current['temp'];
+    document.querySelector('#current-temp').textContent = currentTemp;
 
-    var cityHumidity = document.createElement('p');
-    cityHumidity.classList = 'pl-3 weather-info';
-    cityHumidity.textContent = `Humidity: ${forecast.current['humidity']}%`;
-    currentWeatherEl.appendChild(cityHumidity);
+    var currentHumidity = forecast.current['humidity'];
+    document.querySelector('#current-humidity').textContent = currentHumidity;
 
-    var cityWind = document.createElement('p');
-    cityWind.classList = 'pl-3 weather-info';
-    cityWind.textContent = `Wind Speed: ${forecast.current['wind_speed']} MPH`;
-    currentWeatherEl.appendChild(cityWind);
+    var currentWind = forecast.current['wind_speed'];
+    document.querySelector('#current-wind-speed').textContent = currentWind;
 
-    var cityUv = document.createElement('p');
-    cityUv.classList = 'pl-3 weather-info';
-    cityUv.textContent = `UV Index: ${forecast.current['uvi']}`;
-    currentWeatherEl.appendChild(cityUv);
+    var uviSpan = document.querySelector('#current-uvi')
+    var currentUvi = forecast.current['uvi'];
+    uviSpan.textContent = currentUvi
 
+    // styles UV index
+    if (currentUvi <= 2) {
+        uviSpan.className = 'badge badge-success';
+    } else if (currentUvi <= 5) {
+        uviSpan.className ='badge badge-warning';
+    } else if (currentUvi <= 7) {
+        uviSpan.className = 'badge badge-danger';
+    } else {
+        uviSpan.className = 'badge text-light';
+        uviSpan.setAttribute('style', 'background-color: #553C7B')
+    }
 }
 
 cityBtn.addEventListener('click', formHandler)
