@@ -1,3 +1,24 @@
+<!--
+        /((((((\\\\
+=======((((((((((\\\\\
+     ((           \\\\\\\
+     ( (*    _/      \\\\\\\
+       \    /  \      \\\\\\________________
+        |  |   |       </                  ((\\\\
+        o_|   /        /                      \ \\\\    \\\\\\\
+             |  ._    (                        \ \\\\\\\\\\\\\\\\
+             | /                       /       /    \\\\\\\     \\
+     .______/\/     /                 /       /         \\\
+    / __.____/    _/         ________(       /\
+   / / / ________/`_________'         \     /  \_
+  / /  \ \                             \   \ \_  \
+ ( <    \ \                             >  /    \ \
+  \/     \\_                           / /       > )
+          \_|                         / /       / /
+                                    _//       _//
+                                   /_|       /_|
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,9 +43,10 @@
                 <h3 class="card-header text-uppercase bg-secondary text-light">Search for a City</h4>
                 <form class="input-group m-4" id="city-form">
                     <input type="text" class="form-input input-group-text col-9 mr-2" id="city-input" name="city" />
-                    <button type="button" class="btn btn-info" id="search-btn"><i class="fas fa-search"></i></button>
+                    <button type="button" class="btn btn-primary" id="search-btn"><i class="fas fa-search"></i></button>
                 </form>
             </div>
+
             <!-- list recent cities -->
             <div class="card bg-color-light mt-4">
                 <h3 class="card-header text-uppercase bg-secondary text-light">Recent Cities</h4>
@@ -35,24 +57,40 @@
                 </ul>
             </div>
         </div>
-
         <div class="col-12 col-md-9 city-forecast hide">
+
             <!-- city's current forecast -->
-            <div class="card bg-color-light mt-4 mt-md-0 current-weather">
+            <div class="card bg-color-light mt-4 mt-md-0">
                 <h3 class="card-header text-uppercase bg-secondary text-light">Today's Forecast</h3>
-                <h4 class="mt-3 ml-3 city-name">City Name</h5>
-                    <p class="pl-3 mt-1 weather-info">
-                        Current Temperature: <span id="current-temp"></span>
-                    </p>
-                    <p class="pl-3 weather-info">
-                        Humidity: <span id="current-humidity"></span>%
-                    </p>
-                    <p class="pl-3 weather-info">
-                        Wind Speed: <span id="current-wind-speed"></span> MPH
-                    </p>
-                    <p class="pl-3 weather-info">
-                        UV Index: <span id="current-uvi"></span>
-                    </p>
+                <div class="container">
+                    <div class="row">
+                        <h4 class="m-3 city-name">City Name</h5>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <p class="pl-3">
+                                Current Temperature: <span id="current-temp"></span> &deg;F
+                            </p>
+                            <p class="pl-3">
+                                High: <span id="current-high"></span> &deg;F
+                            </p>
+                            <p class="pl-3">
+                                Low: <span id="current-low"></span> &deg;F
+                            </p>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <p class="pl-3">
+                                Humidity: <span id="current-humidity"></span>%
+                            </p>
+                            <p class="pl-3">
+                                Wind Speed: <span id="current-wind-speed"></span> MPH
+                            </p>
+                            <p class="pl-3">
+                                UV Index: <span id="current-uvi"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- city's five day forecast -->
@@ -61,19 +99,50 @@
                 <div class="container p-3">
                     <div class="row row-cols-1 row-cols-md-5">
                         <div class="col">
-                            <div class="card bg-primary text-light p-2 mb-3 mb-md-0">1 of 5</div>
+                            <div class="card bg-primary text-light p-2 mb-3 mb-md-0">
+                                <p class="font-weight-bold mb-1" id="date-1"></p>
+                                <p class="mb-1" id="temp-1"></p>
+                                <p class="mb-1" id="high-1"></p>
+                                <p class="mb-1" id="low-1"></p>
+                                <p class="mb-1" id="humidity-1"></p>
+                            </div>
                         </div>
                         <div class="col">
-                            <div class="card bg-primary text-light p-2 mb-3 mb-md-0">2 of 5</div>
+                            <div class="card bg-primary text-light p-2 mb-3 mb-md-0">
+                                <p class="font-weight-bold mb-1" id="date-2"></p>
+                                <p class="mb-1" id="temp-2"></p>
+                                <p class="mb-1" id="high-2"></p>
+                                <p class="mb-1" id="low-2"></p>
+                                <p class="mb-1" id="humidity-2"></p>
+                            </div>
                         </div>
                         <div class="col">
-                            <div class="card bg-primary text-light p-2 mb-3 mb-md-0">3 of 5</div>
+                            <div class="card bg-primary text-light p-2 mb-3 mb-md-0">
+                                <p class="font-weight-bold mb-1" id="date-3"></p>
+                                <p class="mb-1" id="temp-3"></p>
+                                <p class="mb-1" id="high-3"></p>
+                                <p class="mb-1" id="low-3"></p>
+                                <p class="mb-1" id="humidity-3"></p>
+                                </span>
+                            </div>
                         </div>
                         <div class="col">
-                            <div class="card bg-primary text-light p-2 mb-3 mb-md-0">4 of 5</div>
+                            <div class="card bg-primary text-light p-2 mb-3 mb-md-0">
+                                <p class="font-weight-bold mb-1" id="date-4"></p>
+                                <p class="mb-1" id="temp-4"></p>
+                                <p class="mb-1" id="high-4"></p>
+                                <p class="mb-1" id="low-4"></p>
+                                <p class="mb-1" id="humidity-4"></p>
+                            </div>
                         </div>
                         <div class="col">
-                            <div class="card bg-primary text-light p-2 mb-3 mb-md-0">5 of 5</div>
+                            <div class="card bg-primary text-light p-2 mb-3 mb-md-0">
+                                <p class="font-weight-bold mb-1" id="date-5"></p>
+                                <p class="mb-1" id="temp-5"></p>
+                                <p class="mb-1" id="high-5"></p>
+                                <p class="mb-1" id="low-5"></p>
+                                <p class="mb-1" id="humidity-5"></p>
+                            </div>
                         </div>
                     </div>
                 </div>
