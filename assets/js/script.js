@@ -4,6 +4,7 @@ var cityNameEl = document.querySelector('#city-name');
 var cityArr = [];
 
 var formHandler = function(event) {
+    event.preventDefault();
     // formats city name
     var selectedCity = cityInput
         .value
@@ -23,7 +24,7 @@ var formHandler = function(event) {
 
 // uses 'current weather api' to fetch latitude and longitude
 var getCoords = function(city) {
-    var currentWeatherApi = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
+    var currentWeatherApi = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${apiKey}`;
 
     fetch(currentWeatherApi).then(function(response) {
         if (response.ok) {
@@ -51,7 +52,7 @@ var getCoords = function(city) {
 
     // uses latitude and longitude to fetch current weather and five-day forecast
     var getCityForecast = function(city, lon, lat) {
-    var oneCallApi = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&exclude=minutely,hourly,alerts&appid=${apiKey}`;
+    var oneCallApi = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&exclude=${apiKey}`;
     fetch(oneCallApi).then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
