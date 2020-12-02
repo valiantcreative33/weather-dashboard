@@ -3,3 +3,8 @@
     padding: 0;
     box-sizing: border-box;
   }
+
+  .weather-icon {
+    height: 55px;
+    width: 55px;
+  }
